@@ -6,8 +6,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 public class CDBag extends HashMap<String, Object> {
@@ -22,30 +22,30 @@ public class CDBag extends HashMap<String, Object> {
                             .newDocument();
         Element root = doc.createElement(rootKey);
         doc.appendChild(root);
-        addElement(doc, root, this);
+        addElementsToDocument(doc, root, this);
         return doc;
     }
 
-    private void addElement(Document doc, Element parent, CDBag bag) {
+    private void addElementsToDocument(Document doc, Element parent, CDBag bag) {
         for (Entry<String, Object> entry : bag.entrySet()) {
             Element child = doc.createElement(entry.getKey());
             parent.appendChild(child);
             if (entry.getValue() instanceof CDBag) {
-                addElement(doc, child, (CDBag) entry.getValue());
+                addElementsToDocument(doc, child, (CDBag) entry.getValue());
             } else {
                 child.setTextContent(entry.getValue().toString());
             }
         }
     }
-    
+
     public static CDBag fromDocument(Document doc) {
         CDBag bag = new CDBag();
         Element root = doc.getDocumentElement();
-        addElements(bag, root);
+        addElementsFromDocument(bag, root);
         return bag;
     }
 
-    private static void addElements(CDBag bag, Element parent) {
+    private static void addElementsFromDocument(CDBag bag, Element parent) {
         NodeList children = parent.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
             Node child = children.item(i);
@@ -60,7 +60,7 @@ public class CDBag extends HashMap<String, Object> {
                 bag.put(key, value);
             } else {
                 CDBag nestedBag = new CDBag();
-                addElements(nestedBag, childElement);
+                addElementsFromDocument(nestedBag, childElement);
                 bag.put(key, nestedBag);
             }
         }
