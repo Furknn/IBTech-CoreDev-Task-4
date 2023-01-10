@@ -2,12 +2,12 @@ package com.coredev.types;
 
 import java.util.HashMap;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.coredev.utils.XmlHelper;
 
 
 public class CDBag extends HashMap<String, Object> {
@@ -17,9 +17,7 @@ public class CDBag extends HashMap<String, Object> {
 	}
 
 	public Document toDocument(String rootKey) throws Exception {
-        Document doc = DocumentBuilderFactory.newInstance()
-                            .newDocumentBuilder()
-                            .newDocument();
+        Document doc = XmlHelper.createDocument();
         Element root = doc.createElement(rootKey);
         doc.appendChild(root);
         addElementsToDocument(doc, root, this);
