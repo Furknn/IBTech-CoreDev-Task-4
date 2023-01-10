@@ -32,7 +32,7 @@ public class AddressOperations {
     public CDBag getAddress(CDBag inbag) {
         CDBag outBag = new CDBag();
         AddressRepository addressRepository = new AddressRepository();
-        Address address = addressRepository.find((Long)inbag.get("id"));
+        Address address = addressRepository.find(Long.valueOf((String) inbag.get("id")));
         outBag.put("id", address.getId());
         outBag.put("street", address.getStreet());
         outBag.put("city", address.getCity());

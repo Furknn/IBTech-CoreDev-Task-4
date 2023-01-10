@@ -5,14 +5,14 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>AddressServlet</servlet-name>
-  	<display-name>AddressServlet</display-name>
+  	<servlet-name>CommandServlet</servlet-name>
+  	<display-name>CommandServlet</display-name>
   	<description></description>
-  	<servlet-class>com.coredev.servlet.AddressServlet</servlet-class>
+  	<servlet-class>com.coredev.servlet.CommandServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>AddressServlet</servlet-name>
-  	<url-pattern>/AddressServlet</url-pattern>
+  	<servlet-name>CommandServlet</servlet-name>
+  	<url-pattern>/CommandServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
